@@ -1,12 +1,12 @@
 // DEPENDENCIES
 import React, { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../utils/auth';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from "@apollo/react-hooks";
 import { LOGIN_USER } from "../utils/mutations";
 // LOGIN FORM
 const LoginForm = () => {
-  const [login, { error }] = useMutation(LOGIN_USER);
+  const [login, {error} ] = useMutation(LOGIN_USER);
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -14,7 +14,7 @@ const LoginForm = () => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async event => {
     event.preventDefault();
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -41,7 +41,7 @@ const LoginForm = () => {
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
+          Something went wrong!
         </Alert>
         <Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>
@@ -72,8 +72,9 @@ const LoginForm = () => {
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>
-          Submit
+          Login
         </Button>
+        {error && <div>Login failed</div>}
       </Form>
     </>
   );

@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../utils/auth';
-import { useMutation } from "@apollo/react-hooks";
-import { ADD_USER } from "../utils/mutations";
+import { useMutation } from '@apollo/react-hooks';
+import { ADD_USER } from '../utils/mutations';
 // SIGNUP FORM
 const SignupForm = () => {
   const [addUser, { error }] = useMutation(ADD_USER);
@@ -17,7 +17,7 @@ const SignupForm = () => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async event => {
     event.preventDefault();
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
@@ -46,7 +46,7 @@ const SignupForm = () => {
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
+          Something went wrong!
         </Alert>
 
         <Form.Group>
@@ -91,7 +91,7 @@ const SignupForm = () => {
           disabled={!(userFormData.username && userFormData.email && userFormData.password)}
           type='submit'
           variant='success'>
-          Submit
+          Sign-Up
         </Button>
       </Form>
     </>

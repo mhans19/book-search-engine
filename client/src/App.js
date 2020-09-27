@@ -8,30 +8,30 @@ import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
 // Apollo Client
 const client = new ApolloClient({
-  request: (operation) => {
-    const token = localStorage.getItem("id_token");
+  request: operation => {
+    const token = localStorage.getItem('id_token');
     operation.setContext({
       headers: {
-        authorization: token ? `Bearer ${token}` : "",
-      },
-    });
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    })
   },
-  uri: "/graphql",
+  uri: '/graphql'
 });
 // App - Wrapped with Apollo Provider
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <>
-          <Navbar />
-          <Switch>
-            <Route exact path="/" component={SearchBooks} />
-            <Route exact path="/saved" component={SavedBooks} />
-            <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
-          </Switch>
-        </>
-      </Router>
+        <Router>
+          <>
+            <Navbar />
+            <Switch>
+              <Route exact path='/' component={SearchBooks} />
+              <Route exact path='/saved' component={SavedBooks} />
+              <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+            </Switch>
+          </>
+        </Router>
     </ApolloProvider>
   );
 }
